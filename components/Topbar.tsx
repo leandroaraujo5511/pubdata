@@ -29,10 +29,11 @@ import {
   } from "@chakra-ui/icons";
 import NavLink from "./NavLink";
 import { ITopBar } from "../interfaces";
+import ModalNewPub from "./NewPub";
 
 const Topbar = ({children}: ITopBar) => {
 
-    const links = ["Dashboard", "Team"];
+    const links = [{name: "Dashboard", href: "/Dashboard"}, {name: "Team", href: "/Team"}];
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [openCreatePub, setOpenCreatePub ] = useState(false)
 
@@ -64,7 +65,7 @@ const Topbar = ({children}: ITopBar) => {
               display={{ base: "none", md: "flex" }}
             >
               {links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link.name} href={link.href}>{link.name}</NavLink>
               ))}
             </HStack>
           </HStack>
@@ -79,8 +80,6 @@ const Topbar = ({children}: ITopBar) => {
             >
               Criar publicação
             </Button>
-
-
             <Menu>
               <MenuButton
                 as={Button}
@@ -96,12 +95,7 @@ const Topbar = ({children}: ITopBar) => {
                   background={'gray.800'}
                 />
               </MenuButton>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList>
+
             </Menu>
           </Flex>
         </Flex>
@@ -110,7 +104,7 @@ const Topbar = ({children}: ITopBar) => {
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link.name} href={link.href}>{link.name}</NavLink>
               ))}
             </Stack>
           </Box>
@@ -118,6 +112,8 @@ const Topbar = ({children}: ITopBar) => {
       </Box>
 
       <Box p={4}>{children}</Box>
+
+      <ModalNewPub isOpen={openCreatePub} onClose={handleOpenCreatePub} onOpen={() => {}}/>
     </>
     )
 

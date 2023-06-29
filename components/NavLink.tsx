@@ -2,7 +2,12 @@
 import { Link } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-const NavLink = ({ children }: { children: ReactNode }) => (
+interface INavLink {
+  children: ReactNode
+  href: string
+}
+
+const NavLink = ({ children, href }: INavLink) => (
     <Link
       px={2}
       py={1}
@@ -11,7 +16,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
         textDecoration: "none",
         bg: "gray.200",
       }}
-      href={"#"}
+      href={href}
     >
       {children}
     </Link>
