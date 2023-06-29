@@ -1,12 +1,12 @@
 import Topbar from "../../components/Topbar";
 
 
-const Dashboard = () => {
+const Publication = () => {
   return (
     <Topbar>
-        Dashboard
+        Publication
     </Topbar>
     );
 };
 
-export default Dashboard;
+export default Publication;
