@@ -12,14 +12,18 @@
     "@chakra-ui/react": "^2.7.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.1.1",
+    "formik": "^2.4.2",
     "framer-motion": "^10.12.17",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.1",
     "react-icons": "^4.10.1",
     "react-quill": "^2.0.0",
     "slate": "^0.94.1",
-    "slate-react": "^0.97.1"
+    "slate-react": "^0.97.1",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",

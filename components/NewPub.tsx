@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertDialog,
   Box,
   Button,
   Drawer,
@@ -9,6 +11,8 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+  FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   Select,
@@ -16,8 +20,13 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
+
+import { SubmitHandler, useForm } from "react-hook-form";
 import { platformImpact, product, publishClassification } from "../constants";
 import dynamic from "next/dynamic";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Form } from "formik";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface IModalNewPub {
@@ -27,7 +36,28 @@ interface IModalNewPub {
 }
 
 const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
+  const [title, setDescription] = useState("");
   const [editorState, setEditorState] = useState("");
+
+  const {
+    handleSubmit,
+    register,
+    getValues,
+    formState: { errors, isSubmitting },
+  } = useForm();
+
+  const handleSubmitNewPub = (e) => {
+    e.preventDefault();
+    const { title, publishClassification, platformImpact, product, date } =
+      getValues();
+    console.log(
+      title,
+      publishClassification,
+      platformImpact,
+      product,
+      editorState
+    );
+  };
 
   return (
     <Drawer isOpen={isOpen} placement="right" onClose={onClose} size={"xl"}>
@@ -35,65 +65,85 @@ const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader borderBottomWidth="1px">Nova publicação</DrawerHeader>
-
-        <DrawerBody>
-          <Stack spacing="24px">
-            <Flex gap={4} display={{ md: "flex" }}>
-              <Box>
+        <Flex
+          alignItems={"center"}
+          gap={4}
+          flexDirection={"column"}
+          justifyContent={"center"}
+        >
+          <form
+            action=""
+            onSubmit={handleSubmitNewPub}
+            style={{ height: "100vh", width: "100vh" }}
+          >
+            <Flex m={4} flexDirection={"column"} gap={6}>
+              <FormControl>
                 <FormLabel>Selecione o produto</FormLabel>
-                <Select placeholder="Selecione">
+                <Select placeholder="Selecione" {...register("product")}>
                   {product.map((item) => (
                     <option value={item.description} key={item.id}>
                       {item.description}
                     </option>
                   ))}
                 </Select>
-              </Box>
-              <Box>
+              </FormControl>
+              <FormControl>
                 <FormLabel>Tipo da publicação</FormLabel>
-                <Select placeholder="Selecione">
+                <Select
+                  placeholder="Selecione"
+                  {...register("publishClassification")}
+                >
                   {publishClassification.map((item) => (
                     <option value={item.description} key={item.id}>
                       {item.description}
                     </option>
                   ))}
                 </Select>
-              </Box>
-              <Box>
+              </FormControl>
+              <FormControl>
                 <FormLabel>Plataforma de impactor</FormLabel>
-                <Select placeholder="Selecione">
+                <Select placeholder="Selecione" {...register("platformImpact")}>
                   {platformImpact.map((item) => (
                     <option value={item.description} key={item.id}>
                       {item.description}
                     </option>
                   ))}
                 </Select>
-              </Box>
-            </Flex>
-
-            <Box>
-              <FormLabel>Titulo</FormLabel>
-              <Input></Input>
-            </Box>
-            <Box>
-              <FormLabel>Descrição</FormLabel>
-              <Box>
-                <ReactQuill
-                  theme="snow"
-                  value={editorState}
-                  onChange={setEditorState}
+              </FormControl>
+              <FormControl>
+                <FormLabel>Data da publicação</FormLabel>
+                <Input name="date" type={"date"} {...register("date")} />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Titulo</FormLabel>
+                <Input
+                  name="title"
+                  placeholder="Ex: Pbi 1234 - Criar tabela de exames"
+                  {...register("title")}
                 />
-              </Box>
-            </Box>
-          </Stack>
-        </DrawerBody>
-
-        <DrawerFooter borderTopWidth="1px">
-          <Button variant="outline" mr={3} onClick={onClose}>
-            Cancelar
-          </Button>
-          <Button colorScheme="blue">Enviar</Button>
-        </DrawerFooter>
+                <FormErrorMessage>
+                  {errors.title && errors.title.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Descrição</FormLabel>
+                <Box>
+                  <ReactQuill
+                    placeholder="Descrição da publicação"
+                    theme="snow"
+                    value={editorState}
+                    onChange={setEditorState}
+                  />
+                </Box>
+              </FormControl>
+            </Flex>
+            <DrawerFooter borderTopWidth="1px">
+              <Button colorScheme="blue" type="submit" isLoading={isSubmitting}>
+                Enviar
+              </Button>
+            </DrawerFooter>
+          </form>
+        </Flex>
       </DrawerContent>
     </Drawer>
   );
