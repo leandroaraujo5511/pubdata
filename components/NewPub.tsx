@@ -19,6 +19,7 @@ import "react-quill/dist/quill.snow.css";
 import {  useForm } from "react-hook-form";
 import { platformImpact, product, publishClassification } from "../constants";
 import dynamic from "next/dynamic";
+import { api } from "../services/api";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface IModalNewPub {
@@ -37,17 +38,25 @@ const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const handleSubmitNewPub = (e) => {
+  const handleSubmitNewPub = async (e)  => {
     e.preventDefault();
     const { title, publishClassification, platformImpact, product, date } =
       getValues();
-    console.log(
-      title,
-      publishClassification,
-      platformImpact,
-      product,
-      editorState
-    );
+
+    
+
+    const response = await api.post("publish",{
+      data: {
+        title,
+        classificationId: +publishClassification,
+        impactedPlatforms: [{id: +platformImpact }],
+        products: [{id: +product }],
+        description: editorState,
+        publishedDate: date
+      }
+  })
+
+
   };
 
   return (
@@ -72,7 +81,7 @@ const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
                 <FormLabel>Selecione o produto</FormLabel>
                 <Select placeholder="Selecione" {...register("product")}>
                   {product.map((item) => (
-                    <option value={item.description} key={item.id}>
+                    <option value={item.id} key={item.id}>
                       {item.description}
                     </option>
                   ))}
@@ -85,7 +94,7 @@ const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
                   {...register("publishClassification")}
                 >
                   {publishClassification.map((item) => (
-                    <option value={item.description} key={item.id}>
+                    <option value={item.id} key={item.id}>
                       {item.description}
                     </option>
                   ))}
@@ -95,7 +104,7 @@ const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
                 <FormLabel>Plataforma de impactor</FormLabel>
                 <Select placeholder="Selecione" {...register("platformImpact")}>
                   {platformImpact.map((item) => (
-                    <option value={item.description} key={item.id}>
+                    <option value={item.id} key={item.id}>
                       {item.description}
                     </option>
                   ))}
