@@ -40,17 +40,15 @@ const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
 
   const handleSubmitNewPub = async (e)  => {
     e.preventDefault();
-    const { title, publishClassification, platformImpact, product, date } =
+    const { title, publishClassification, platformImpact, product, date , productOwner} =
       getValues();
-
-    
-
     const response = await api.post("publish",{
       
         title,
         classificationId: +publishClassification,
         impactedPlatforms: [{id: +platformImpact }],
         products: [{id: +product }],
+        productOwner,
         description: editorState,
         publishedDate: date
       
@@ -60,7 +58,7 @@ const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
   };
 
   return (
-    <Drawer isOpen={isOpen} placement="right" onClose={onClose} size={"xl"}>
+    <Drawer isOpen={isOpen} placement="right" onClose={onClose} size={"full"}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
@@ -110,10 +108,16 @@ const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
                   ))}
                 </Select>
               </FormControl>
-              <FormControl>
-                <FormLabel>Data da publicação</FormLabel>
-                <Input name="date" type={"date"} {...register("date")} />
-              </FormControl>
+              <Flex flexDirection={'row'} gap={4}>
+                <FormControl>
+                  <FormLabel>Data da publicação</FormLabel>
+                  <Input name="date" type={"date"} {...register("date")} />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>PO</FormLabel>
+                  <Input name="productOwner" {...register("productOwner")} />
+                </FormControl>
+              </Flex>
               <FormControl>
                 <FormLabel>Titulo</FormLabel>
                 <Input
