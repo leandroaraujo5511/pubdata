@@ -15,6 +15,7 @@ const SearchBox = () => {
         <Card marginLeft="30px" padding="25px 20px" height="auto">
             <Heading size='sm'>Produtos</Heading>
             <Checkbox
+                marginTop="15px"
                 isChecked={allChecked}
                 isIndeterminate={isIndeterminate}
                 onChange={(e) => setCheckedItems([e.target.checked, e.target.checked, e.target.checked, e.target.checked, e.target.checked, e.target.checked, e.target.checked])}
@@ -67,7 +68,7 @@ const SearchBox = () => {
             >
                 Verifica
             </Checkbox>
-            <Heading size='sm' marginTop="10px">Classificação</Heading>
+            <Heading size='sm' marginTop="15px">Classificação</Heading>
             <Box marginTop="20px" display="flex" justifyContent="space-between">
                 <Checkbox
                     isChecked={publishClassification[0]}
@@ -90,7 +91,7 @@ const SearchBox = () => {
                 </Checkbox>
 
             </Box>
-            <Button colorScheme='blue' marginTop="25px" onClick={() => alert("oi")}>Filtrar</Button>
+            <Button colorScheme='blue' marginTop="15px" onClick={() => {}}>Filtrar</Button>
         </Card>
     )
 
