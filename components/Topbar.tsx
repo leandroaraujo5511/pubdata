@@ -57,7 +57,7 @@ const Topbar = ({ children }: ITopBar) => {
                 width={'100px'}
                 alt="Logo"
                 src={
-                  "https://drive.google.com/file/d/1Iq51kvLGfFA9RjjKcWnV11kqWJQrRdcu/view"
+                  "https://i.pinimg.com/originals/8f/4c/c4/8f4cc49335ccf2a2d67652264a5d0a53.png"
                 }
               />
               <HStack

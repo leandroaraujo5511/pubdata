@@ -1,10 +1,7 @@
 import {
-  Alert,
-  AlertDialog,
   Box,
   Button,
   Drawer,
-  DrawerBody,
   DrawerCloseButton,
   DrawerContent,
   DrawerFooter,
@@ -16,17 +13,12 @@ import {
   FormLabel,
   Input,
   Select,
-  Stack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
-
-import { SubmitHandler, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { platformImpact, product, publishClassification } from "../constants";
 import dynamic from "next/dynamic";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Form } from "formik";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface IModalNewPub {
@@ -36,7 +28,6 @@ interface IModalNewPub {
 }
 
 const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
-  const [title, setDescription] = useState("");
   const [editorState, setEditorState] = useState("");
 
   const {
