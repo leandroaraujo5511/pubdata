@@ -1,6 +1,6 @@
 import Topbar from "../../components/Topbar";
 import { Card, CardHeader, CardBody, CardFooter, Text, Heading, Stack, Box, StackDivider, Tag } from '@chakra-ui/react'
-
+import SearchBox from "../../components/searchBox"
 
 const Dashboard = () => {
   return (
@@ -55,7 +55,7 @@ const Dashboard = () => {
             </CardBody>
           </Card>
         </Box>
-        <Box border="1px solid black" borderRadius={20} marginLeft="30px"></Box>
+        <SearchBox />
       </Box>
     </Topbar>
   );
