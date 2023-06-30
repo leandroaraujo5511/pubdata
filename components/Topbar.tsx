@@ -33,7 +33,7 @@ import ModalNewPub from "./NewPub";
 
 const Topbar = ({ children }: ITopBar) => {
 
-  const links = [{ name: "Dashboard", href: "/Dashboard" }, { name: "Team", href: "/Team" }];
+  const links = [{ name: "Dashboard", href: "/" }, { name: "Team", href: "/Team" }];
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [openCreatePub, setOpenCreatePub] = useState(false)
 
