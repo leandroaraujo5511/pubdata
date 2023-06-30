@@ -46,14 +46,14 @@ const NewPub = ({ isOpen, onClose, onOpen }: IModalNewPub) => {
     
 
     const response = await api.post("publish",{
-      data: {
+      
         title,
         classificationId: +publishClassification,
         impactedPlatforms: [{id: +platformImpact }],
         products: [{id: +product }],
         description: editorState,
         publishedDate: date
-      }
+      
   })
 
 
