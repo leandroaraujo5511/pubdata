@@ -1,8 +1,7 @@
 
-import { Box, Button, Card, Checkbox, Link, Stack } from "@chakra-ui/react";
-import React, { useCallback } from "react";
+import { Box, Button, Card, Checkbox, Heading, Link, Stack } from "@chakra-ui/react";
+import React from "react";
 import { ReactNode } from "react";
-
 
 const SearchBox = () => {
 
@@ -12,16 +11,9 @@ const SearchBox = () => {
     const allChecked = checkedItems.every(Boolean)
     const isIndeterminate = checkedItems.some(Boolean) && !allChecked
 
-    const teste = useCallback((indexInput, event) => {
-        let newData = []
-
-        checkedItems.map((item, index) => item[indexInput] === indexInput ? newData.push(checkedItems[index]) : newData.push(event.target.checked))
-
-        setCheckedItems(newData)
-    }, [checkedItems])
-
     return (
         <Card marginLeft="30px" padding="25px 20px" height="auto">
+            <Heading size='sm'>Produtos</Heading>
             <Checkbox
                 isChecked={allChecked}
                 isIndeterminate={isIndeterminate}
@@ -75,8 +67,8 @@ const SearchBox = () => {
             >
                 Verifica
             </Checkbox>
-
-            <Box marginTop="20px"  display="flex" justifyContent="space-between">
+            <Heading size='sm' marginTop="10px">Classificação</Heading>
+            <Box marginTop="20px" display="flex" justifyContent="space-between">
                 <Checkbox
                     isChecked={publishClassification[0]}
                     onChange={(e) => setPublishClassification([e.target.checked, publishClassification[1], publishClassification[2]])}
@@ -98,7 +90,7 @@ const SearchBox = () => {
                 </Checkbox>
 
             </Box>
-            <Button colorScheme='blue' marginTop="25px" onClick={()=> alert("oi")}>Filtrar</Button>
+            <Button colorScheme='blue' marginTop="25px" onClick={() => alert("oi")}>Filtrar</Button>
         </Card>
     )
 

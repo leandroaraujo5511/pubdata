@@ -49,6 +49,12 @@ const Dashboard = () => {
                   <Text pt='2' fontSize='sm'>
                     See a detailed analysis of all your business clients. See a detailed analysis of
                     all your business clients. See a detailed analysis of all your business clients.
+                    See a detailed analysis of all your business clients. See a detailed analysis of
+                    all your business clients. See a detailed analysis of all your business clients.
+                    See a detailed analysis of all your business clients. See a detailed analysis of
+                    all your business clients. See a detailed analysis of all your business clients.
+                    See a detailed analysis of all your business clients. See a detailed analysis of
+                    all your business clients. See a detailed analysis of all your business clients.
                   </Text>
                 </Box>
               </Stack>
